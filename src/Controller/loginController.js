@@ -2,14 +2,12 @@ const authSchema = require("../Modal/Auth");
 
 const login = async (req, res) => {
   try {
-    console.log(req.body);
     if (!req.body.userName || !req.body.password) {
       throw "Username and password is not provided !";
     }
     const userName = req.body.userName;
     const user = await authSchema.findOne({ userName });
     if (!user) {
-      console.log("user undefined");
       throw "user not found !";
     }
     if (req.body.password !== user.password) {
@@ -17,7 +15,6 @@ const login = async (req, res) => {
     }
     res.status(200).send("user found");
   } catch (error) {
-    console.log(error);
     res.status(500).send(error);
   }
 };
