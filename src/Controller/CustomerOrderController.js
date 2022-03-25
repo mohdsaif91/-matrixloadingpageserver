@@ -28,23 +28,34 @@ const getOrder = async (req, res) => {
 
 const getProductByFilter = async (req, res) => {
   try {
+    console.log(req.body);
     const filterData = await CustomerModal.find({
-      createdAt: {
-        $gte: req.body.startDate,
-        $lte: req.body.endDate,
-      },
+      ...req.body,
     });
     if (!filterData) {
       throw "get Operation failed !";
     }
+    console.log(filterData);
     res.status(200).send(filterData);
   } catch (error) {
     res.status(500).send(error);
   }
 };
 
+const getCustomerName = async (req, res) => {
+  try {
+    console.log("looki");
+
+    res.status(200).send("hi");
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
+};
+
 module.exports = {
   addCustomerOrder,
+  getCustomerName,
   getOrder,
   getProductByFilter,
 };
